@@ -9,6 +9,7 @@ import java.util.*;
 
 @RequestMapping("/students")
 @RequiredArgsConstructor
+@RestController
 public class StudentController {
 
     private final StudentService studentService;
@@ -31,6 +32,11 @@ public class StudentController {
     @PutMapping("/update/student/{id}")
     public Student updateStudent(@PathVariable Integer id, @RequestBody Student student){
         return studentService.updateStudent(id, student);
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "Test";
     }
 
 }
