@@ -2,19 +2,16 @@ package com.example.springboot.controller;
 
 import com.example.springboot.entity.Student;
 import com.example.springboot.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@RestController
 @RequestMapping("/students")
+@RequiredArgsConstructor
 public class StudentController {
 
     private final StudentService studentService;
-
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
 
     @GetMapping("/all")
     public List<Student> getAllStudents(){
