@@ -11,15 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import static com.example.springboot.config.UserRoles.ADMIN;
+import static com.example.springboot.config.UserRoles.STUDENT;
+
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-//    private final  PasswordConfig passwordConfig;
-//
-//    public SecurityConfig(PasswordConfig passwordConfig) {
-//        this.passwordConfig = passwordConfig;
-//    }
 
     private  PasswordEncoder passwordEncoder;
 
@@ -35,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/","index", "/css/*", "/js/*")
                 .permitAll()
+                .antMatchers("/students/**").hasRole(ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -47,13 +45,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails ziya = User.builder()
                 .username("ziya")
                 .password(passwordEncoder.encode("password"))
-                .roles("ADMIN")
+                .roles(ADMIN.name())
                 .build();
 
         UserDetails aytiqaqash = User.builder()
                 .username("aytiqaqash")
-                .password(passwordEncoder.encode("password"))
-                .roles("STUDENT")
+                .password(passwordEncoder.encode("passwordo"))
+                .roles(STUDENT.name())
                 .build();
 
         return new InMemoryUserDetailsManager(ziya,aytiqaqash);
