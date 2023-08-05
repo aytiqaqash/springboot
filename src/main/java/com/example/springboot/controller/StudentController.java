@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@RequestMapping("/students")
+@RequestMapping("/api/v1/students")
 @RequiredArgsConstructor
 @RestController
 public class StudentController {
@@ -19,17 +19,17 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
-    @PostMapping("/create/student")
+    @PostMapping("/student")
     public Student createStudent(@RequestBody Student student){
         return studentService.createStudent(student);
     }
 
-    @DeleteMapping("/delete/student/{id}")
+    @DeleteMapping("/student/{id}")
     public void deleteStudent(@PathVariable Integer id){
         studentService.deleteStudent(id);
     }
 
-    @PutMapping("/update/student/{id}")
+    @PutMapping("/student/{id}")
     public Student updateStudent(@PathVariable Integer id, @RequestBody Student student){
         return studentService.updateStudent(id, student);
     }
